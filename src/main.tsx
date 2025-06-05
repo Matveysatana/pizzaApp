@@ -5,7 +5,7 @@ import App from "./App.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import Menu from "./pages/Menu/Menu.tsx";
 import Cart from "./pages/Cart/Cart.tsx";
-import Layout from "./layout/Layout.tsx";
+import Layout from "./layout/Layout/Layout.tsx";
 
 const routes = createBrowserRouter([
   {
