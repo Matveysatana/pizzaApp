@@ -13,7 +13,8 @@ function App() {
       <Button appearence="big" onClick={addCounter}>
         Кнопка
       </Button>
-      <Input />
+      <Input placeholder="Email" type="email" />
+
     </>
   );
 }
