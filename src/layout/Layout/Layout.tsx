@@ -22,14 +22,14 @@ const Layout = () => {
 					[styles.active]: isActive
 				})}>
             <img src="/menu-icon.svg" alt="Иконка меню" />
-            Перейти в меню
+            Меню
           </NavLink>
 
           <NavLink to='/cart' className={({ isActive }) => cn(styles['link'], {
 					[styles.active]: isActive
 				})}>
             <img src="/cart-icon.svg" alt="Иконка корзины" />
-            Перейти в корзину
+            Корзина
           </NavLink>
         </div>
         <Button className={styles["exit"]}>
@@ -37,7 +37,9 @@ const Layout = () => {
           Выход
         </Button>
       </div>
+      <div className={styles['content']}>
       <Outlet />
+      </div>
     </div>
   );
 };
