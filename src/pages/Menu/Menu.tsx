@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import Headling from "../../components/Headling/Headling";
-import ProductCard from "../../components/ProductCard/ProductCard";
 import Search from "../../components/Search/Search";
 import { PREFIX } from "../../helpers/API";
 import type { Product } from "../../interfaces/Product.interfaces";
 import styles from "./Menu.module.css";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import MenuList from "./MenuList/MenuList";
 
 const Menu = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | undefined>();
 
   const getMenu = async () => {
     try {
@@ -23,7 +24,9 @@ const Menu = () => {
       setProducts(data);
       setIsLoading(false);
     } catch (e) {
-      console.error(e);
+      if (e instanceof AxiosError) {
+        setError(e.message);
+      }
       setIsLoading(false);
       return;
     }
@@ -40,18 +43,8 @@ const Menu = () => {
         <Search placeholder="Введите блюдо или состав" />
       </div>
       <div>
-        {!isLoading &&
-          products.map((p) => (
-            <ProductCard
-              key={p.id}
-              id={p.id}
-              name={p.name}
-              description={p.ingredients.join(", ")}
-              rating={p.rating}
-              price={p.price}
-              image={p.image}
-            />
-          ))}
+        {error && <>{error}</>}
+        {!isLoading && <MenuList products={products} />}
         {isLoading && <>Загружаем</>}
       </div>
     </>
